@@ -21,6 +21,7 @@ CONF_EXT_ID = "ext_id"
 CONF_PUSH_PASSWORD = "push_password"
 CONF_TRANSITION = "transition"
 CONF_TYPE = "type"
+CONF_INVERTED = "inverted"
 
 TYPE_RELAY = "relay"
 TYPE_XPWM = "xpwm"

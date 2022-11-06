@@ -10,6 +10,7 @@ from . import IpxEntity
 from .const import (
     CONF_DEVICES,
     CONF_TYPE,
+    CONF_INVERTED,
     CONTROLLER,
     COORDINATOR,
     DOMAIN,
@@ -48,8 +49,11 @@ class VirtualOutBinarySensor(IpxEntity, BinarySensorEntity):
 
     @property
     def is_on(self) -> bool:
-        """Return the state."""
-        return self.coordinator.data[f"VO{self._id}"] == 1
+        """Return the state."""        
+        if self._inverted:
+            return self.coordinator.data[f"VO{self._id}"] == 0
+        else:
+            return self.coordinator.data[f"VO{self._id}"] == 1
 
 
 class DigitalInBinarySensor(IpxEntity, BinarySensorEntity):
@@ -58,4 +62,7 @@ class DigitalInBinarySensor(IpxEntity, BinarySensorEntity):
     @property
     def is_on(self) -> bool:
         """Return the state."""
-        return self.coordinator.data[f"D{self._id}"] == 1
+        if self._inverted:
+            return self.coordinator.data[f"D{self._id}"] == 0
+        else:
+            return self.coordinator.data[f"D{self._id}"] == 1
